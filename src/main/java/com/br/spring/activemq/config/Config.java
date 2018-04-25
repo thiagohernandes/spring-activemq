@@ -37,6 +37,11 @@ public class Config {
     }
 
     @Bean
+    public ActiveMQQueue queue4(){
+        return new ActiveMQQueue("standalone.queue4");
+    }
+
+    @Bean
     public ConnectionFactory connectionFactory(){
         ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory();
         connectionFactory.setBrokerURL(brokerUrl);

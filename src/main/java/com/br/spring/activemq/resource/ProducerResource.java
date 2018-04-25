@@ -6,9 +6,8 @@ import org.springframework.jms.core.JmsTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import javax.jms.Queue;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
+import java.util.List;
 
 @RestController
 @RequestMapping("/rest/producers")
@@ -26,6 +25,9 @@ public class ProducerResource {
     @Autowired
     Queue queue3;
 
+    @Autowired
+    Queue queue4;
+
     @GetMapping("/um/{mensagem}")
     public String publishQueue1(@PathVariable("mensagem") final String mensagem){
         jmsTemplate.convertAndSend(queue,mensagem);
@@ -42,5 +44,11 @@ public class ProducerResource {
     @PostMapping("/tres")
     public void publishQueue3(@RequestBody Funcionario funcionario) throws IOException {
         jmsTemplate.convertAndSend(queue3,funcionario);
+    }
+
+    @ResponseBody
+    @PostMapping("/quatro")
+    public void publishQueue4(@RequestBody Funcionario funcionarioValores) throws IOException {
+        jmsTemplate.convertAndSend(queue4,funcionarioValores);
     }
 }
